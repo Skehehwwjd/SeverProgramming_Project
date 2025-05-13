@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=900, initial-scale=1.0" />
+  <title>난이도 선택</title>
+  
+  /* CSS 부분 */
+  
+  <style>
+    /* 중앙 정렬, 배경색 설정 */
+    body {
+      background: #fbfbff;
+      min-height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
+
+    /* 크기, 배경, 그림자 등 */
+    .level-select-container {
+      position: relative;
+      width: 900px;
+      height: 650px;
+      background: #F8F6FF;
+      border-radius: 32px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    /* 나가기 버튼 (호버 효과 넣음) */
+    .exit-btn {
+      position: absolute;
+      top: 20px;
+      left: 40px;
+      background: none;
+      border: none;
+      padding: 0;
+      z-index: 200;
+      cursor: pointer;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: filter 0.18s;
+    }
+    .exit-btn img {
+      width: 100%;
+      height: auto;
+      display: block;
+      pointer-events: none;
+      user-select: none;
+    }
+    .exit-btn:hover,
+    .exit-btn:focus {
+      filter: brightness(1.15) drop-shadow(0 2px 8px #a18fff55);
+    }
+
+    /* 애니메이션 효과(움직이는) 적용된 타이틀 이미지 */
+    .level-title-img {
+      position: absolute;
+      top: 34px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 270px;
+      max-width: 80vw;
+      z-index: 10;
+      user-select: none;
+      pointer-events: none;
+      animation: popIn 0.8s cubic-bezier(.6,-0.28,.74,.05), bounceTitle 2.2s 1.2s infinite alternate;
+    }
+
+    /* 팝인/바운스 애니메이션 */
+    @keyframes popIn {
+      0% { opacity: 0; transform: translateX(-50%) scale(0.7);}
+      70% { opacity: 1; transform: translateX(-50%) scale(1.12);}
+      100% { opacity: 1; transform: translateX(-50%) scale(1);}
+    }
+    @keyframes bounceTitle {
+      0% { transform: translateX(-50%) scale(1);}
+      60% { transform: translateX(-50%) scale(1.04);}
+      100% { transform: translateX(-50%) scale(1);}
+    }
+
+    /* 화살표 이미지 */
+    .level-arrow {
+      position: absolute;
+      left: 130px;
+      top: 50px;
+      width: 100px;
+      height: 110px;
+      transition: top 0.23s cubic-bezier(.4,2,.6,1);
+      pointer-events: none;
+      z-index: 2;
+      display: none;
+      transform: rotate(90deg);
+    }
+
+    /* 버튼 세로 정렬 */
+ .level-btns {
+ 디스플레이: 플렉스;
+ 플렉스 direction: 열;
+ 갭: 35 px;
+ 여백 왼쪽: 130 px;
+ 마진 탑: 80 px;
+    }
+
+    /* 난이도 버튼 (위치, 정렬 등) */
+ .level-btn {
+ 배경: #f3ebff;
+ 상위: 20개의 px;
+ 왼쪽: 50 px;
+ 경계: 없음;
+ 패딩: 0;
+ 개요: 없음;
+ 커서: 포인터;
+ 국경 radius: 25 px;
+ box-shadow: 0 6px 18px rgba(120,100,255,0.10);
+ 전환: 박스 shadow 0.2초, 배경 0.2초;
+ 너비: 500 px;
+ 높이: 130 px;
+ 디스플레이: 플렉스;
+ 정렬 items: 중심;
+ 정당화 내용: 중심;
+ 위치: 상대적;
+ 글꼴 크기: 1.1em;
+    }
+ .level-btn:hover,
+ .level-btn:focus {
+ 박스 shadow: 0 10 px 32 px rgba(41, 27, 130, 0.15);
+ 배경: #ede6ff;
+    }
+ .level-btn img {
+ 너비: 300 px;
+ 높이: 자동;
+ 포인터-events: 없음;
+ 사용자 선택: 없음;
+ 디스플레이: 차단;
+    }
+
+    /* 반응형 대응(어떤 기기에서도 보기 좋게) */
+ @media (최대 너비: 700 px) {
+ .level-select-container {
+ 폭: 98vw;
+ 최소 너비: 320 px;
+ 최소 높이: 360 px;
+ 패딩-왼쪽: 0;
+      }
+ .레벨 title-img {
+ 폭: 48vw;
+ 최소 너비: 120 px;
+ 상위: 16개의 px;
+      }
+ .level-btn {
+ 폭: 80vw;
+ 높이: 16vw;
+ 최소 높이: 64 px;
+      }
+ .level-btn img {
+ 폭: 58vw;
+ 최소 너비: 120 px;
+      }
+ .level-btns {
+ 여백 왼쪽: 0;
+ 마진 탑: 10vw;
+ 갭: 6vw;
+      }
+ .exit-btn {
+ 상위: 10개의 px;
+ 왼쪽: 10 px;
+ 너비: 38 px;
+ 높이: 38 px;
+      }
+    }
+ </스타일.>
+</머리>
+
+  
+<!-- HTML 부분 -->
+  
+<몸>
+ <!-- 메인 UI 박스 -->
+ <div class="level-select-container">
+ 위치: 절대;
+ 상단: 34 px;
+ 왼쪽: 50%;
+ 변환: 번역 X(-50%);
+ 너비: 270 px;
+ 최대 너비: 80vw;
+ z-지수: 10;
+ 사용자 선택: 없음;
+ 포인터-events: 없음;
+ 애니메이션: 0.8초 큐빅 베지어(.6,-0.28,.74,.05), bounceTitle 2.2초 1.2초 무한 교대;
+ <img src="img/easy.png" alt="초급(유치원)" />
+ </버튼>
+ <버튼 클래스="level-btn" 데이터 인덱스="1">
+ <img src="img/normal.png" 대체="중급(초1~2)" />
+ 0% {불투명도: 0; 변환: translateX(-50%) 척도(0.7);}
+ 70% { 불투명도: 1; 변환: 번역X(-50%) 스케일(1.12);}
+ 100% {불투명도: 1; 변환: 번역X(-50%) 스케일(1);}
+ </버튼>
+ </디브>
+ </디브>
+
+  
+// JS 부분 
+  
+ <대본>
+ // 난이도 버튼, 화살표 가져옴
+ const levelBtns = 문서.쿼리SelectorAll('level-btn');
+ const 화살표 = document.getElementById('levelArrow');
+
+ // 마우스 올리면 보이고, 떼면 사라지도록
+ 레벨Btns.각자(((btn)) => {
+ btn.addEventListener('mouseenter',) => {
+ arrow.style.top = (btn.offsetTop + btn.offset)높이/2 - 화살표.오프셋높이/2 - 40) + "px";
+ 화살표.style.display = '차단';
+ });
+ btn.addEventListener('mouseleave',) => {
+ 화살표.style.display = 'none';
+ });
+ });
+
+ // 나가기 버튼 클릭 시 fnum-game.html로 이동
+ document.getElementById('exitBtn').온클릭 = 함수 () {
+ 창.위치.href = 'fnum-game.HTML';
+ }
+ </대본>
+</몸>
+ </HTML>
